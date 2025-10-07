@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.10.0)
+project(leetcode_mastering VERSION 0.1.0 LANGUAGES C CXX)
+
+add_executable(1518_WaterBottles 1518_WaterBottles.cpp)
+add_executable(3100_WaterBottlesII 3100_WaterBottlesII.cpp)
