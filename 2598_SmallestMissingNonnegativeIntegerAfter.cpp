@@ -3,54 +3,55 @@
 #include <queue>
 #include <stack>
 #include <algorithm>
+#include <map>
 
 using namespace std;
 
-// Slower O(nlogn) and not good solution
-// class Solution {
-// public:
-//     int findSmallestInteger(vector<int>& nums, int value) {
-//         std::map<int, int> factors;
-//         // O(n)
-//         for (auto& num : nums) {
-//             auto moduled = ((num % value) + value) % value;
-//             auto it = factors.find(moduled);
-//             if (it != factors.end())
-//                 it->second++;
-//             else
-//                 factors.insert(std::pair(moduled, 0));
-//             num = moduled + (factors[moduled] * value);
-//         }
-
-//         // O(nlogn)
-//         std::sort(nums.begin(), nums.end());
-
-//         // O(n) find MEX
-//         for (int i = 0; i < nums.size(); ++i) {
-//             if (nums[i] != i)
-//                 return i;
-//         }
-//         return nums.size();
-//     }
-// };
-
-// Faster O(n) and smarter solution
+// Note: Slower O(nlogn) and not good solution
 class Solution {
 public:
     int findSmallestInteger(vector<int>& nums, int value) {
-        vector<int> mp(value);
-        for (auto& x : nums) {
-            int v = (x % value + value) % value;
-            mp[v]++;
+        std::map<int, int> factors;
+        // O(n)
+        for (auto& num : nums) {
+            auto moduled = ((num % value) + value) % value;
+            auto it = factors.find(moduled);
+            if (it != factors.end())
+                it->second++;
+            else
+                factors.insert(std::pair(moduled, 0));
+            num = moduled + (factors[moduled] * value);
         }
-        int mex = 0;
-        while (mp[mex % value] > 0) {
-            mp[mex % value]--;
-            mex++;
+
+        // O(nlogn)
+        std::sort(nums.begin(), nums.end());
+
+        // O(n) find MEX
+        for (int i = 0; i < nums.size(); ++i) {
+            if (nums[i] != i)
+                return i;
         }
-        return mex;
+        return nums.size();
     }
 };
+
+// Note: Faster O(n) and smarter solution
+// class Solution {
+// public:
+//     int findSmallestInteger(vector<int>& nums, int value) {
+//         vector<int> remainders(value);
+//         for (auto& x : nums) {
+//             int modulated = (x % value + value) % value;
+//             remainders[modulated]++;
+//         }
+//         int ans = 0;
+//         while (remainders[ans % value] > 0) {
+//             remainders[ans % value]--;
+//             ans++;
+//         }
+//         return ans;
+//     }
+// };
 
 int main(int, char**) {
     Solution sol;
