@@ -1,0 +1,9 @@
+BasedOnStyle: Google
+ColumnLimit: 100
+Cpp11BracedListStyle: true
+IndentWidth: 4
+Language: Cpp
+PointerAlignment: Left
+SortIncludes: true
+TabWidth: 4
+UseTab: Never
