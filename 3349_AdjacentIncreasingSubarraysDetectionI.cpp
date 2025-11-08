@@ -56,6 +56,6 @@ public:
 
 int main(int, char**) {
     Solution sol;
-    std::vector nums = {2,5,7,8,9,2,3,4,3,1};
+    std::vector<int> nums = {2,5,7,8,9,2,3,4,3,1};
     std::cout << sol.hasIncreasingSubarrays(nums, 2);
 }
